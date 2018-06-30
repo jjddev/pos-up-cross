@@ -1,7 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 using Autofac;
+using AwesomeSeries.Infra.HttpTools;
+using Refit;
+using Series.Infra;
+using Series.Infra.Api;
+using Series.Services;
 using Series.Services.Navigation;
 
 namespace Series.ViewModel.Base
@@ -19,6 +25,18 @@ namespace Series.ViewModel.Base
         {
             _containerBuilder = new ContainerBuilder();
             _containerBuilder.RegisterType<NavigationService>().As<INavigationService>();
+            _containerBuilder.RegisterType<SerieService>().As<ISerieService>();
+
+            _containerBuilder.Register(api =>
+            {
+                var client = new HttpClient(new HttpLoggingHandler())
+                {
+                    BaseAddress = new Uri(AppSettings.ApiUrl),
+                    Timeout = TimeSpan.FromSeconds(90)
+                };
+                return RestService.For<ITmdbApi>(client);
+            }).As<ITmdbApi>().InstancePerDependency();
+
             _containerBuilder.RegisterType<DetailViewModel>();
         }
 
