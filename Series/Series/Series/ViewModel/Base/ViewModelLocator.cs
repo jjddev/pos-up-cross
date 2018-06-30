@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using Autofac;
+using Series.Services.Navigation;
 
 namespace Series.ViewModel.Base
 {
@@ -17,6 +18,8 @@ namespace Series.ViewModel.Base
         public ViewModelLocator()
         {
             _containerBuilder = new ContainerBuilder();
+            _containerBuilder.RegisterType<NavigationService>().As<INavigationService>();
+            _containerBuilder.RegisterType<DetailViewModel>();
         }
 
         public T Resolve<T>() => _container.Resolve<T>();

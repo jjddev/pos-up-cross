@@ -4,7 +4,7 @@
              x:Class="Series.Views.MainView">
   <ContentView.Content>
       <StackLayout>
-          <Label Text="Hello Xamarin.Forms!" />
+          <Label Text="Hello Xamarin.Forms! 2015" />
       </StackLayout>
   </ContentView.Content>
 </ContentView>

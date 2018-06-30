@@ -5,11 +5,13 @@ using System.Text;
 
 namespace Series.ViewModel
 {
-    public class MainViewModel : ViewModelBase { 
-    
-    public MainViewModel() : base("series")
+    public class MainViewModel : ViewModelBase
     {
 
+        public MainViewModel() : base("series")
+        {
+
+        }
+
     }
-    
 }

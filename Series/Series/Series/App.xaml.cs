@@ -1,3 +1,5 @@
+using Series.Services.Navigation;
+using Series.ViewModel.Base;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -10,11 +12,17 @@ namespace Series
 		public App ()
 		{
 			InitializeComponent();
-
-			MainPage = new MainPage();
+            buildDependencies();
+            initNavigation();
 		}
 
-		protected override void OnStart ()
+        private async void initNavigation()
+        {
+            var navigation = ViewModelLocator.Instance.Resolve<INavigationService>();
+            await navigation.Initialize();
+        }
+
+        protected override void OnStart ()
 		{
 			// Handle when your app starts
 		}
@@ -28,5 +36,10 @@ namespace Series
 		{
 			// Handle when your app resumes
 		}
+
+        private void buildDependencies()
+        {
+            ViewModelLocator.Instance.Build();
+        }
 	}
 }

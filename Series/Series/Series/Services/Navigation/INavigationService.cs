@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Series.Services.Navigation
 {
-    public interface INavigation
+    public interface INavigationService
     {
+
         Task Initialize();
         Task NavigationAsync<TViewModel>() where TViewModel : ViewModelBase;
 
