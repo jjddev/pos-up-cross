@@ -1,4 +1,5 @@
-﻿using Series.ViewModel.Base;
+﻿using AwesomeSeries.Models;
+using Series.ViewModel.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,17 +10,19 @@ namespace Series.Services.Navigation
 {
     public interface INavigationService
     {
-
         Task Initialize();
-        Task NavigationAsync<TViewModel>() where TViewModel : ViewModelBase;
+        Task NavigateToAsync<TViewModel>() where TViewModel : ViewModelBase;
+        Task NavigateToAsync<TViewModel>(object parameter)
+            where TViewModel : ViewModelBase;
+        Task NavigateToAsync(Type viewModelType);
 
-        Task NavigationAsync<TViewModel>(object parameter) where TViewModel : ViewModelBase;
-        Task NavigationAsync(Type viewModelType);
-        Task NavigationAsync(Type viewModelType, object parameter);
-        Task NavigationAsync();
-        Task NavigateAndClearBackStackAsync<TViewModel>(object parameter = null)  where  TViewModel : ViewModelBase;
+        Task NavigateToAsync(Type viewModelType, object parameter);
+        Task NavigateBackAsync();
+
+        Task NavigateAndClearBackStackAsync<TViewModel>(object parameter = null)
+            where TViewModel : ViewModelBase;
 
         Task RemoveLastFromBackStack();
-
+        Task NavigationAsync<T>(Serie serie);
     }
 }
