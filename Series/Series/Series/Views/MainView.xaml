@@ -20,13 +20,11 @@
                             Orientation="Horizontal"
                             VerticalOptions="FillAndExpand"
                             HorizontalOptions="FillAndExpand">
-                            <Image Source="{Binding Poster}"
-                                   VerticalOptions="Start"
-                                   HorizontalOptions="Start" 
-                                   HeightRequest="120" />
+                            <Image Source="{Binding Poster}" VerticalOptions="Start" HorizontalOptions="Start" HeightRequest="120" />
                             <StackLayout>
-                                <Label Text="{Binding Name}" FontSize="Medium" HorizontalOptions="Center" FontAttributes="Bold" />
-                                <Label Text="{Binding OriginalName}" FontSize="Small" />
+                                <Label Text="{Binding Name}" FontSize="Medium" FontAttributes="Bold" VerticalOptions="Start" />
+                                <Label Text="{Binding ReleaseDate, StringFormat='Lançamento:  {0}'}"/>
+                                <Label Text="{Binding VoteAverage, StringFormat='Populariedade: {0:0.##}'}" />
                             </StackLayout>
                         </StackLayout>
                     </ViewCell>

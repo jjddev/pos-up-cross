@@ -8,8 +8,8 @@
             <Image Source="{Binding Poster}" />
             
             <Label Text="{Binding Name}" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center"/>
-            <Label Text="{Binding ReleaseDate, StringFormat='Estreia:  {0}'} " FontAttributes="Bold" />
-            <Label Text="{Binding Votes, StringFormat='Populariedade: {0:d2}'} " FontAttributes="Bold" />
+            <Label Text="{Binding ReleaseDate, StringFormat='Lançamento:  {0}'} " FontAttributes="Bold" />
+            <Label Text="{Binding Votes, StringFormat='Populariedade: {0:0.##}'} " FontAttributes="Bold" />
             <Label Text="Sinopse: " FontAttributes="Bold"/>
             <Label Text="{Binding Overview}"/>            
         </StackLayout>
