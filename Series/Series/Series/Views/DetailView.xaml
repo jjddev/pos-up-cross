@@ -1,12 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Series.Views.DetailView">
+             x:Class="Series.Views.DetailView"
+             Title="{Binding Title}">
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms222!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+            <Image Source="{Binding Poster}" />
+            
+            <Label Text="{Binding Name}" FontSize="Large" FontAttributes="Bold" HorizontalOptions="Center"/>
+            <Label Text="{Binding ReleaseDate, StringFormat='Estreia:  {0}'} " FontAttributes="Bold" />
+            <Label Text="{Binding Votes, StringFormat='Populariedade: {0:d2}'} " FontAttributes="Bold" />
+            <Label Text="Sinopse: " FontAttributes="Bold"/>
+            <Label Text="{Binding Overview}"/>            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

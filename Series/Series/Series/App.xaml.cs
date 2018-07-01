@@ -7,19 +7,24 @@ using Xamarin.Forms.Xaml;
 [assembly: XamlCompilation (XamlCompilationOptions.Compile)]
 namespace Series
 {
-	public partial class App : Application
-	{
-		public App ()
-		{
-			InitializeComponent();
-            buildDependencies();
-            initNavigation();
-		}
-
-        private async void initNavigation()
+    public partial class App : Application
+    {
+        public App()
         {
-            var navigation = ViewModelLocator.Instance.Resolve<INavigationService>();
-            await navigation.Initialize();
+            InitializeComponent();
+            BuildDependencies();
+            InitNavigation();
+        }
+
+        async void InitNavigation()
+        {
+            var navigationService = ViewModelLocator.Instance.Resolve<INavigationService>();
+            await navigationService.Initialize();
+        }
+
+        void BuildDependencies()
+        {
+            ViewModelLocator.Instance.Build();
         }
 
         protected override void OnStart ()

@@ -1,8 +1,10 @@
+﻿using Newtonsoft.Json;
+using Series.Infra;
 using System;
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Text;
 
-
-namespace AwesomeSeries.Models
+namespace Series.Models
 {
     public class Serie
     {
@@ -31,10 +33,24 @@ namespace AwesomeSeries.Models
         public string PosterPath { get; set; }
 
         [JsonIgnore]
-        public string releaseDate {
-            get {
-                return $"(FilterAirDate:dd/mm/yy)";
-                 }
+        public string Poster
+        {
+            get { return $"{AppSettings.ApiImageBaseUrl}{PosterPath}"; }
+        }
+
+        [JsonIgnore]
+        public string Backdrop
+        {
+            get { return $"{AppSettings.ApiImageBaseUrl}{BackdropPath}"; }
+        }
+
+        [JsonIgnore]
+        public string ReleaseDate
+        {
+            get
+            {
+                return $"{FirstAirDate:dd/MM/yyyy}";
+            }
         }
     }
 }

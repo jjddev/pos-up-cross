@@ -10,11 +10,11 @@ using Xamarin.Forms.Xaml;
 namespace Series.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class MainView : ContentView
-	{
-		public MainView ()
+	public partial class MainView : ContentPage
+    {
+		public MainView()
 		{
-			InitializeComponent ();
+			InitializeComponent();
 		}
 	}
 }

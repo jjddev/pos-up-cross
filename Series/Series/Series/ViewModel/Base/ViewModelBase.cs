@@ -10,7 +10,6 @@ namespace Series.ViewModel.Base
 {
     public abstract class ViewModelBase : BindableObject
     {
-
         protected readonly INavigationService NavigationService;
 
         string _title;
@@ -22,14 +21,11 @@ namespace Series.ViewModel.Base
 
         public ViewModelBase(string title)
         {
-
-
             Title = title;
-
             NavigationService = ViewModelLocator.Instance.Resolve<INavigationService>();
         }
 
-        public virtual Task InitializeAsync(object nagavigationData)
+        public virtual Task InitializeAsync(object navgationData)
         {
             return Task.FromResult(true);
         }

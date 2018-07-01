@@ -1,6 +1,6 @@
-﻿using AwesomeSeries.Models;
-using Series.Infra;
+﻿using Series.Infra;
 using Series.Infra.Api;
+using Series.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,7 +19,6 @@ namespace Series.Services
 
         public async Task<SerieResponse> GetSeriesAsync()
         {
-
             return await _api.GetSerieResponseAsync(AppSettings.ApiKey);
         }
 

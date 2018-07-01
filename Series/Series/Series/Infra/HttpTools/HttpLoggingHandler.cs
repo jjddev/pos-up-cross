@@ -11,11 +11,7 @@ namespace AwesomeSeries.Infra.HttpTools
 {
     public class HttpLoggingHandler : DelegatingHandler
     {
-        public HttpLoggingHandler(HttpMessageHandler innerHandler = null)
-            : base(innerHandler ?? new HttpClientHandler())
-        { }
-
-        public HttpLoggingHandler()
+        public HttpLoggingHandler(HttpMessageHandler innerHandler = null) : base(innerHandler ?? new HttpClientHandler())
         {
         }
 

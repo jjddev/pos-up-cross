@@ -12,9 +12,9 @@ namespace Series.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class DetailView : ContentPage
 	{
-		public DetailView ()
+		public DetailView()
 		{
-			InitializeComponent ();
+			InitializeComponent();
 		}
 	}
 }

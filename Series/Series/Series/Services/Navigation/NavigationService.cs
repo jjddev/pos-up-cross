@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using AwesomeSeries.Models;
 using Series.ViewModel;
 using Series.ViewModel.Base;
 using Series.Views;
@@ -19,19 +18,33 @@ namespace Series.Services.Navigation
         {
             get { return Application.Current; }
         }
+
+        public NavigationService()
+        {
+            _mappings = new Dictionary<Type, Type>();
+            CreateViewModelMappings();
+        }
+
+        private void CreateViewModelMappings()
+        {
+            _mappings.Add(typeof(MainViewModel), typeof(MainView));
+            _mappings.Add(typeof(DetailViewModel), typeof(DetailView));
+        }
+
         public async Task Initialize()
         {
             await NavigateToAsync<MainViewModel>();
         }
 
-        public async Task NavigateAndClearBackStackAsync<TViewModel>(object parameter = null) where TViewModel : ViewModelBase
+        public async Task NavigateAndClearBackStackAsync<TViewModel>(object parameter = null)
+            where TViewModel : ViewModelBase
         {
             Page page = CreateAndBingPage(typeof(TViewModel), parameter);
             var navigationPage = CurrentApplication.MainPage as NavigationPage;
 
             await navigationPage.PushAsync(page);
 
-            await(page.BindingContext as ViewModelBase).InitializeAsync(parameter);
+            await (page.BindingContext as ViewModelBase).InitializeAsync(parameter);
 
             if (navigationPage != null && navigationPage.Navigation.NavigationStack.Count > 0)
             {
@@ -52,7 +65,6 @@ namespace Series.Services.Navigation
                 await CurrentApplication.MainPage.Navigation.PopAsync();
             }
         }
-
 
         public Task NavigateToAsync<TViewModel>() where TViewModel : ViewModelBase
             => InternalNavigateToAsync(typeof(TViewModel), null);
@@ -119,11 +131,6 @@ namespace Series.Services.Navigation
         #region Not Implemented
 
         public Task RemoveLastFromBackStack()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task NavigationAsync<T>(Serie serie)
         {
             throw new NotImplementedException();
         }

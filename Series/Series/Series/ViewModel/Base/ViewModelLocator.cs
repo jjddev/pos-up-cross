@@ -16,16 +16,22 @@ namespace Series.ViewModel.Base
     {
         IContainer _container;
         ContainerBuilder _containerBuilder;
+
         static readonly ViewModelLocator _instance = new ViewModelLocator();
-        public static ViewModelLocator Instance{
+        public static ViewModelLocator Instance
+        {
             get { return _instance; }
         }
-        
+
         public ViewModelLocator()
         {
             _containerBuilder = new ContainerBuilder();
+
             _containerBuilder.RegisterType<NavigationService>().As<INavigationService>();
             _containerBuilder.RegisterType<SerieService>().As<ISerieService>();
+
+            _containerBuilder.RegisterType<MainViewModel>();
+            _containerBuilder.RegisterType<DetailViewModel>();
 
             _containerBuilder.Register(api =>
             {
@@ -34,20 +40,25 @@ namespace Series.ViewModel.Base
                     BaseAddress = new Uri(AppSettings.ApiUrl),
                     Timeout = TimeSpan.FromSeconds(90)
                 };
-                return RestService.For<ITmdbApi>(client);
-            }).As<ITmdbApi>().InstancePerDependency();
 
-            _containerBuilder.RegisterType<DetailViewModel>();
+                Console.WriteLine("AQUI>>>");
+                return RestService.For<ITmdbApi>(client);
+
+            }).As<ITmdbApi>().InstancePerDependency();
         }
 
-        public T Resolve<T>() => _container.Resolve<T>();
+        public T Resolve<T>()
+        {
+            return _container.Resolve<T>();
+        }
 
         public object Resolve(Type type)
         {
             return _container.Resolve(type);
         }
 
-        public void Register<TInterface, TImplementation>() where TImplementation : TInterface
+        public void Register<TInterface, TImplementation>()
+            where TImplementation : TInterface
         {
             _containerBuilder.RegisterType<TImplementation>().As<TInterface>();
         }
@@ -59,7 +70,8 @@ namespace Series.ViewModel.Base
 
         public void Build()
         {
-            if (_container == null) _container = _containerBuilder.Build();
+            if (_container == null)
+                _container = _containerBuilder.Build();
         }
     }
 }

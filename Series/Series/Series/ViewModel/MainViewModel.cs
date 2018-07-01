@@ -1,4 +1,4 @@
-﻿using AwesomeSeries.Models;
+﻿using Series.Models;
 using Series.Services;
 using Series.ViewModel.Base;
 using System;
@@ -17,44 +17,40 @@ namespace Series.ViewModel
         readonly ISerieService _serieService;
 
         public ICommand ItemClickCommand { get; }
+        public ObservableCollection<Serie> Items { get; }
 
-        public ObservableCollection<Serie>Items {get;}
-
-        public MainViewModel(ISerieService serieService) : base("series")
+        public MainViewModel(ISerieService serieService) : base("Super Series")
         {
             _serieService = serieService;
             Items = new ObservableCollection<Serie>();
-
-            ItemClickCommand = new Command<Serie>(async (item) => await ItemClickCommandExecute(item));
-
+            ItemClickCommand = new Command<Serie>(async (item)
+                => await ItemClickCommandExecute(item));
         }
 
         async Task ItemClickCommandExecute(Serie serie)
         {
-            if(serie != null)
-            {
-                await NavigationService.NavigationAsync<DetailViewModel>(serie);
-            }
+            if (serie != null)
+                await NavigationService.NavigateToAsync<DetailViewModel>(serie);
         }
 
-        public override async Task InitializeAsync(object navigationData)
+        public override async Task InitializeAsync(object navgationData)
         {
-            await base.InitializeAsync(navigationData);
+            await base.InitializeAsync(navgationData);
+
             await LoadDataAsync();
         }
 
         async Task LoadDataAsync()
         {
             var result = await _serieService.GetSeriesAsync();
-            addItens(result);
+
+            AddItens(result);
         }
 
-        private void addItens(SerieResponse result)
+        private void AddItens(SerieResponse result)
         {
             Items.Clear();
             result?.Series.ToList()?.ForEach(i => Items.Add(i));
-
-            
         }
     }
 }

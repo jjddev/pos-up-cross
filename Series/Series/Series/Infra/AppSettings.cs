@@ -7,7 +7,7 @@ namespace Series.Infra
     public static class AppSettings
     {
         public const string ApiUrl = "https://api.themoviedb.org/3";
-        public const string ApiKey = "ad332258020257fb88e2cc468225dcb0";
+        public const string ApiKey = "18ab244d5cf2606de9fffc396332e450";
         public const string ApiImageBaseUrl = "https://image.tmdb.org/t/p/w500/";
     }
 }
